@@ -1,0 +1,554 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAFAF8;
+  --foreground: #0A0A0A;
+  --primary: #0A0A0A;
+  --primary-foreground: #FAFAF8;
+  --secondary: #F5F0E8;
+  --secondary-foreground: #0A0A0A;
+  --accent: #C8A882;
+  --accent-foreground: #0A0A0A;
+  --muted: #F0EBE1;
+  --muted-foreground: #6B6560;
+  --card: #FAFAF8;
+  --card-foreground: #0A0A0A;
+  --border: #E8E2D8;
+  --input: #E8E2D8;
+  --ring: #C8A882;
+  --radius: 0px;
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-serif: var(--font-fraunces), serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: none; /* replaced by MagneticCursor */
+  }
+
+  /* Restore cursor inside admin panel */
+  .admin-cursor-restore,
+  .admin-cursor-restore * {
+    cursor: auto !important;
+  }
+
+  /* Restore on inputs so text cursor shows */
+  input, textarea, select {
+    cursor: auto;
+  }
+
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Scroll reveal animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-fade.visible {
+  opacity: 1;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* WhatsApp pulse */
+@keyframes wa-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+.wa-pulse {
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+/* Hero fade in */
+@keyframes hero-in {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate {
+  animation: hero-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+.scroll-bounce {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* Product card image zoom */
+.product-img-wrap {
+  overflow: hidden;
+}
+
+.product-img-wrap img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Category card hover */
+.category-card {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+/* Button micro-interaction */
+.btn-primary {
+  transition: background 0.3s ease, transform 0.25s ease, letter-spacing 0.35s ease, opacity 0.25s ease;
+  will-change: transform;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0px) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+.btn-outline {
+  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+
+.btn-outline:hover {
+  transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  transform: translateY(0px) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* Nav scroll effect */
+.nav-scrolled {
+  background: rgba(250, 250, 248, 0.96) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* =============================================
+   CAROUSEL ANIMATIONS
+   ============================================= */
+
+@keyframes carousel-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes carousel-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.carousel-fade-in {
+  animation: carousel-fade-in 0.42s ease-in-out forwards;
+}
+
+.carousel-fade-out {
+  animation: carousel-fade-out 0.42s ease-in-out forwards;
+}
+
+/* Carousel arrow micro-interaction */
+.carousel-arrow {
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Carousel dot */
+.carousel-dot {
+  cursor: pointer;
+}
+
+/* =============================================
+   COLOR SWATCH MICRO-INTERACTIONS
+   ============================================= */
+
+.swatch-btn {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.swatch-btn:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   ENHANCED BUTTON MICRO-INTERACTIONS
+   ============================================= */
+
+.btn-primary {
+  transition: background 0.3s ease, transform 0.25s ease, letter-spacing 0.35s ease, opacity 0.25s ease;
+  will-change: transform;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0px) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+.btn-outline {
+  transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+
+.btn-outline:hover {
+  transform: translateY(-2px);
+}
+
+.btn-outline:active {
+  transform: translateY(0px) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* =============================================
+   ENHANCED PRODUCT CARD
+   ============================================= */
+
+.product-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* =============================================
+   WHY ÉLANE ICON HOVER
+   ============================================= */
+
+.why-icon-wrap {
+  transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.why-item:hover .why-icon-wrap {
+  border-color: var(--foreground);
+  transform: translateY(-3px);
+}
+
+/* =============================================
+   TESTIMONIAL CARD HOVER
+   ============================================= */
+
+.testi-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.testi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+}
+
+/* =============================================
+   NAV LINK UNDERLINE MICRO-INTERACTION
+   ============================================= */
+
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
+}
+
+/* =============================================
+   PAGE FADE-IN TRANSITION
+   ============================================= */
+
+@keyframes page-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* =============================================
+   FILM GRAIN OVERLAY (Lookbook)
+   ============================================= */
+
+.lookbook-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* =============================================
+   SCROLLING MARQUEE TICKER
+   ============================================= */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* =============================================
+   SHIMMER SKELETON (loading state)
+   ============================================= */
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--secondary) 25%, var(--muted) 50%, var(--secondary) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+/* =============================================
+   MAGNETIC BUTTON GLOW (WhatsApp, CTA)
+   ============================================= */
+
+@keyframes soft-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 168, 130, 0); }
+  50% { box-shadow: 0 0 24px 4px rgba(200, 168, 130, 0.18); }
+}
+
+.glow-accent {
+  animation: soft-glow 3s ease-in-out infinite;
+}
+
+/* =============================================
+   FLOATING DOTS BACKGROUND DECORATION
+   ============================================= */
+
+@keyframes float-dot {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.35; }
+  50% { transform: translateY(-14px) scale(1.08); opacity: 0.6; }
+}
+
+.float-dot-1 { animation: float-dot 4.5s ease-in-out infinite; }
+.float-dot-2 { animation: float-dot 5.5s ease-in-out infinite 1s; }
+.float-dot-3 { animation: float-dot 4s ease-in-out infinite 2s; }
+
+/* =============================================
+   HERO IMAGE SUBTLE DRIFT
+   ============================================= */
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0px) scale(1.02); }
+  50% { transform: translateY(-8px) scale(1.04); }
+}
+
+.hero-drift {
+  animation: drift 8s ease-in-out infinite;
+}
+
+/* =============================================
+   SECTION DIVIDER LINE DRAW
+   ============================================= */
+
+@keyframes line-draw {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.line-draw {
+  animation: line-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* =============================================
+   LOOKBOOK DOT TRANSITION
+   ============================================= */
+
+.lookbook-dot {
+  cursor: pointer;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease;
+}
+
+/* =============================================
+   PRODUCT CARD SHINE ON HOVER
+   ============================================= */
+
+.product-card {
+  position: relative;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.product-card:hover::before {
+  left: 125%;
+  transition: left 0.6s ease;
+}
+
+/* =============================================
+   SMOOTH LINK UNDERLINE (footer, nav)
+   ============================================= */
+
+.link-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-hover:hover::after {
+  width: 100%;
+}
+
+/* =============================================
+   TESTIMONIAL STAR TWINKLE
+   ============================================= */
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.92); }
+}
+
+.star-twinkle {
+  animation: star-twinkle 2.5s ease-in-out infinite;
+}
+
+/* =============================================
+   SWATCH SELECTED RING PULSE
+   ============================================= */
+
+@keyframes ring-pulse {
+  0% { box-shadow: 0 0 0 2px rgba(10,10,10,0.2); }
+  50% { box-shadow: 0 0 0 4px rgba(10,10,10,0.1); }
+  100% { box-shadow: 0 0 0 2px rgba(10,10,10,0.2); }
+}
+
+.swatch-active {
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+/* =============================================
+   ANNOUNCEMENT BAR SLIDE IN
+   ============================================= */
+
+@keyframes slide-down {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.announcement-bar {
+  animation: slide-down 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

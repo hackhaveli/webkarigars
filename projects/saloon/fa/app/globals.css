@@ -1,0 +1,361 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Luxury palette */
+  --background: #0a0a0a;
+  --foreground: #f5f1e8;
+  --ivory: #f5f1e8;
+  --ivory-soft: #e8e2d0;
+  --gold: #c9a961;
+  --gold-bright: #e6c77a;
+  --gold-deep: #8a7340;
+  --black-soft: #121212;
+  --black-velvet: #060606;
+
+  --card: #0a0a0a;
+  --card-foreground: #f5f1e8;
+  --popover: #0a0a0a;
+  --popover-foreground: #f5f1e8;
+  --primary: #c9a961;
+  --primary-foreground: #0a0a0a;
+  --secondary: #121212;
+  --secondary-foreground: #f5f1e8;
+  --muted: #121212;
+  --muted-foreground: #8a8072;
+  --accent: #c9a961;
+  --accent-foreground: #0a0a0a;
+  --destructive: #c94a4a;
+  --destructive-foreground: #f5f1e8;
+  --border: rgba(201, 169, 97, 0.15);
+  --input: rgba(245, 241, 232, 0.1);
+  --ring: #c9a961;
+  --radius: 0;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+  --font-mono: 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ivory: var(--ivory);
+  --color-ivory-soft: var(--ivory-soft);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-black-soft: var(--black-soft);
+  --color-black-velvet: var(--black-velvet);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    background-color: #0a0a0a;
+    color: #f5f1e8;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0a0a0a;
+    color: #f5f1e8;
+    overflow-x: hidden;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hide default cursor on desktop for custom cursor */
+  @media (hover: hover) and (pointer: fine) {
+    body, a, button, [role="button"] {
+      cursor: none;
+    }
+  }
+
+  ::selection {
+    background-color: #c9a961;
+    color: #0a0a0a;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(201, 169, 97, 0.3);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 169, 97, 0.6);
+  }
+}
+
+/* ===== Luxury utilities ===== */
+
+.font-serif {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.font-sans {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.tracking-luxury {
+  letter-spacing: 0.35em;
+}
+
+.tracking-luxury-wide {
+  letter-spacing: 0.6em;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(
+    180deg,
+    #e6c77a 0%,
+    #c9a961 50%,
+    #8a7340 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold shimmer animation */
+.text-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #8a7340 0%,
+    #c9a961 25%,
+    #e6c77a 50%,
+    #c9a961 75%,
+    #8a7340 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Light sweep across elements */
+.light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.light-sweep::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(230, 199, 122, 0.15) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  animation: sweep 6s ease-in-out infinite;
+}
+@keyframes sweep {
+  0% { left: -100%; }
+  60% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* Film grain */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 70;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: grain 0.8s steps(4) infinite;
+}
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  20% { transform: translate(-2%, 2%); }
+  40% { transform: translate(2%, -2%); }
+  60% { transform: translate(-1%, 1%); }
+  80% { transform: translate(1%, -1%); }
+}
+
+/* Vignette */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0,0,0,0.6) 100%
+  );
+  pointer-events: none;
+}
+
+/* Light leak */
+.light-leak {
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(
+    circle,
+    rgba(230, 199, 122, 0.08) 0%,
+    rgba(201, 169, 97, 0.03) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* Gold glow */
+.glow-gold {
+  box-shadow:
+    0 0 20px rgba(201, 169, 97, 0.3),
+    0 0 40px rgba(201, 169, 97, 0.15),
+    0 0 80px rgba(201, 169, 97, 0.08);
+}
+
+.glow-gold-text {
+  text-shadow:
+    0 0 20px rgba(201, 169, 97, 0.4),
+    0 0 40px rgba(201, 169, 97, 0.2);
+}
+
+/* Pulse glow */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(201, 169, 97, 0.4),
+      0 0 20px rgba(201, 169, 97, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 20px rgba(201, 169, 97, 0),
+      0 0 30px rgba(201, 169, 97, 0.5);
+  }
+}
+.animate-pulse-gold {
+  animation: pulse-gold 2.5s ease-in-out infinite;
+}
+
+/* Slow rotate */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-rotate-slow {
+  animation: rotate-slow 30s linear infinite;
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Fade in base */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 169, 97, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(201, 169, 97, 0.15);
+}
+
+/* Button ripple placeholder */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-luxury::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(230, 199, 122, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-luxury:hover::before {
+  transform: translateX(100%);
+}
+
+/* Text reveal mask */
+.reveal-mask {
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Hide on mobile cursor */
+@media (hover: none) or (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* Utility for disabling default cursor except for modal/inputs */
+input, textarea {
+  cursor: text !important;
+}

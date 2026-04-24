@@ -1,0 +1,8 @@
+{
+  "name": "template-monorepo",
+  "private": true,
+  "workspaces": [
+    "gateway",
+    "projects/**"
+  ]
+}
