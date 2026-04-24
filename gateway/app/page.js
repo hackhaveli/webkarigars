@@ -1,3 +1,5 @@
+'use client';
+
 export default function Home() {
   const templates = [
     { name: 'E-Commerce Elane', path: '/ecommerce/elane', category: 'E-Commerce' },
